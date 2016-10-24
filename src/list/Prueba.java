@@ -22,7 +22,7 @@ public class Prueba {
         lista.add(2);
         lista.printList();
         lista.add(0, 1);
-        System.out.println("");
+        System.out.println("b lajlndojow");
         lista.printList();
         lista.contains(2);
         System.out.println("El número que se encuentra en la posición 0 es: " + lista.get(0));
