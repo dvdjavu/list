@@ -1,26 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package list;
 
-public class ListImplCircular implements List {
+public class ListImplDobleCircular implements List {
 
     private int size;
-    private Nodo first;
+    private NodoDoble first;
 
-    ListImplCircular(Nodo first) {
+    ListImplDobleCircular(NodoDoble first) {
         this.first = first;
-        first.setNext(first);
         size++;
     }
 
-    ListImplCircular() {
+    ListImplDobleCircular() {
         size = 0;
         first = null;
     }
-        
+
     @Override
     public boolean isEmpty() {
         return size() == 0;
@@ -33,18 +27,18 @@ public class ListImplCircular implements List {
 
     @Override
     public boolean add(int dato) {
-        boolean flag;
+        boolean flag = false;
         if (isEmpty()) {
-            first = new Nodo(dato);
-            first.setNext(first);
-            flag = true;
+            first = new NodoDoble(dato);
         } else {
-            Nodo aux = first;
-            while (aux.getNext() != first) {
-                aux = aux.getNext();
+            NodoDoble aux = first;
+            while (aux.getNext() != null) {
+                aux = aux.getNext(); 
             }
-            aux.setNext(new Nodo(dato));
-            aux.getNext().setNext(first);
+            aux.setNext(new NodoDoble(dato));
+            NodoDoble next = aux.getNext();
+            aux.setNext(next);
+            next.setBefore(aux);
             flag = true;
         }
         size++;
@@ -55,10 +49,7 @@ public class ListImplCircular implements List {
     public boolean add(int index, int dato) throws NullPointerException {
         int posicion = 0;
         try {
-//            if (index < 0 || index > size()) {
-//                throw new NullPointerException();
-//            }
-            if (index < 0) {
+            if (index < 0 || index > size()) {
                 throw new NullPointerException();
             }
         } catch (Exception e) {
@@ -66,20 +57,21 @@ public class ListImplCircular implements List {
             System.out.println(e);
             return false;
         }
-        Nodo nuevo = new Nodo(dato);
+        NodoDoble nuevo = new NodoDoble(dato);
         if (index == 0) {
-            Nodo tmp = first;
+            NodoDoble tmp = first;
             first = nuevo;
             first.setNext(tmp);
+            tmp.setBefore(nuevo);
             ++size;
             return true;
         }
-        Nodo aux = first;
+        NodoDoble aux = first;
         while (aux.getNext() != null && posicion != index - 1) {
             aux = aux.getNext();
             posicion++;
         }
-        Nodo tmp = aux.getNext();
+        NodoDoble tmp = aux.getNext();
         aux.setNext(nuevo);
         nuevo.setNext(tmp);
         ++size;
@@ -92,17 +84,17 @@ public class ListImplCircular implements List {
             System.out.println("La lista se encuentra vacía");
         } else {
             clearRecurse(first);
-            first.setNext(null);
-            first = null;
             System.out.println("La lista fue vaciada por completo");
         }
     }
 
-    void clearRecurse(Nodo borrar) {
-        if (borrar.getNext() == first) {
+    void clearRecurse(NodoDoble borrar) {
+        if (borrar.getNext() == null) {
+            System.gc();
         } else {
             clearRecurse(borrar.getNext());
             borrar.setNext(null);
+            borrar.setBefore(null);
             borrar = null;
             size--;
         }
@@ -113,13 +105,12 @@ public class ListImplCircular implements List {
         if (isEmpty()) {
             System.out.println("La lista esta vacia");
         } else {
-            Nodo aux = first;
-            while (aux.getNext() != first) {
+            NodoDoble aux = first;
+            while (aux.getNext() != null) {
                 System.out.print(" " + aux.getDato());
                 aux = aux.getNext();
             }
             System.out.println(" " + aux.getDato());
-            System.out.println("La lista se repite");
         }
     }
 
@@ -130,7 +121,7 @@ public class ListImplCircular implements List {
             System.err.println("La lista se encuentra vacía");
             return false;
         } else {
-            Nodo aux = first;
+            NodoDoble aux = first;
             if (first.getDato() == d) {
                 ++contiene;
             }
@@ -165,7 +156,7 @@ public class ListImplCircular implements List {
         if (isEmpty()) {
             valor = -1;
         } else {
-            Nodo aux = first;
+            NodoDoble aux = first;
             if (index == 0) {
                 valor = first.getDato();
             } else {
@@ -186,7 +177,7 @@ public class ListImplCircular implements List {
             System.err.println("La lista se encuentra vacía");
             return -1;
         } else {
-            Nodo aux = first;
+            NodoDoble aux = first;
             if (d == first.getDato()) {
                 return posicion;
             }
@@ -206,13 +197,13 @@ public class ListImplCircular implements List {
     public boolean remove(int d) {
         boolean flag = false;
         if (first.getDato() == d) {
-            Nodo aux = first;
+            NodoDoble aux = first;
             first = aux.getNext();
             aux.setNext(null);
             aux = null;
             return true;
         }
-        Nodo aux = first;
+        NodoDoble aux = first;
         while (aux.getNext().getNext() != null) {
             if (aux.getDato() == d) {
                 flag = true;
@@ -221,7 +212,7 @@ public class ListImplCircular implements List {
             aux = aux.getNext();
         }
         if (flag) {
-            Nodo tmp = aux.getNext();
+            NodoDoble tmp = aux.getNext();
             aux.setNext(tmp.getNext());
             tmp.setNext(null);
             tmp = null;
@@ -248,19 +239,19 @@ public class ListImplCircular implements List {
             return false;
         }
         if (index == 0) {
-            Nodo tmp = first;
+            NodoDoble tmp = first;
             first = tmp.getNext();
             tmp.setNext(null);
             tmp = null;
             --size;
             return true;
         }
-        Nodo aux = first;
+        NodoDoble aux = first;
         while (posicion != index - 1) {
             aux = aux.getNext();
             posicion++;
         }
-        Nodo tmp = aux;
+        NodoDoble tmp = aux;
         if (tmp.getNext() == null) {
             aux.setNext(tmp.getNext());
             tmp.setNext(null);
@@ -292,7 +283,7 @@ public class ListImplCircular implements List {
             first.setDato(d);
             return contenido;
         }
-        Nodo aux = first;
+        NodoDoble aux = first;
         while (posicion != index - 1) {
             aux = aux.getNext();
             posicion++;
@@ -306,12 +297,12 @@ public class ListImplCircular implements List {
     public int[] toArray() {
         int[] arreglo = new int[size()];
         arreglo[0] = first.getDato();
-        Nodo aux = first;
+        NodoDoble aux = first;
         for (int i = 0; i < arreglo.length; i++) {
             arreglo[i] = aux.getDato();
             aux = aux.getNext();
         }
         return arreglo;
     }
-
+    
 }

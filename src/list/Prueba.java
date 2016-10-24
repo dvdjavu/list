@@ -5,8 +5,6 @@
  */
 package list;
 
-import java.util.Arrays;
-
 /**
  *
  * @author Alumno
@@ -59,6 +57,20 @@ public class Prueba {
         listaCircular.clear();
         listaCircular.printList();
         System.out.println(listaCircular.size());
+        /*
+        
+        Listas circulares
+        
+         */
+        ListImplDobleCircular listaDobleCircular = new ListImplDobleCircular();
+        System.out.println(getMemory());
+        listaDobleCircular.add(6);
+        listaDobleCircular.add(8);
+        listaDobleCircular.add(2,5);
+        listaDobleCircular.printList();
+        listaDobleCircular.clear();
+        listaDobleCircular.printList();
+        System.out.println(listaDobleCircular.size());
     }
 
     public static double getMemory() {
