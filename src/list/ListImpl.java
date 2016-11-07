@@ -19,7 +19,7 @@ public class ListImpl implements List {
         size = 0;
         first = null;
     }
-        
+
     @Override
     public boolean isEmpty() {
         return size() == 0;
@@ -60,11 +60,9 @@ public class ListImpl implements List {
             System.out.println(e);
             return false;
         }
-        Nodo nuevo = new Nodo(dato);
         if (index == 0) {
             Nodo tmp = first;
-            first = nuevo;
-            first.setNext(tmp);
+            first = new Nodo(dato, tmp);
             ++size;
             return true;
         }
@@ -74,8 +72,8 @@ public class ListImpl implements List {
             posicion++;
         }
         Nodo tmp = aux.getNext();
+        Nodo nuevo = new Nodo(dato, tmp);
         aux.setNext(nuevo);
-        nuevo.setNext(tmp);
         ++size;
         return true;
     }
