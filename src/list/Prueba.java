@@ -51,37 +51,39 @@ public class Prueba {
         Listas circulares
         
          */
-//        ListImplCircular listaCircular = new ListImplCircular();
-//        listaCircular.add(6);
-//        listaCircular.add(8);
-//        listaCircular.add(0,5);
-//        listaCircular.add(2,5);
-//        listaCircular.printList();
-//        listaCircular.contains(5);
-//        listaCircular.printList();
-//        System.out.println(listaCircular.size());
-//        listaCircular.get(5);
-//        listaCircular.printList();
-//        listaCircular.remove(5);
-//        listaCircular.printList();
-//        listaCircular.removeIndex(0);
-//        listaCircular.printList();
-//        listaCircular.set(0, 4);
-//        listaCircular.printList();
-//        System.out.println(Arrays.toString(listaCircular.toArray()));
+        ListImplCircular listaCircular = new ListImplCircular();
+        listaCircular.add(6);
+        listaCircular.add(8);
+        listaCircular.add(0,5);
+        listaCircular.add(2,5);
+        listaCircular.printList();
+        listaCircular.contains(5);
+        listaCircular.printList();
+        System.out.println(listaCircular.size());
+        listaCircular.get(5);
+        listaCircular.printList();
+        listaCircular.remove(5);
+        listaCircular.printList();
+        listaCircular.removeIndex(0);
+        listaCircular.printList();
+        listaCircular.set(0, 4);
+        listaCircular.printList();
+        listaCircular.clear();
+        listaCircular.printList();
+        System.out.println(Arrays.toString(listaCircular.toArray()));
         /*
         
         Listas circulares
         
          */
-        ListImplDobleCircular listaDobleCircular = new ListImplDobleCircular();
-        listaDobleCircular.add(6);
-        listaDobleCircular.add(8);
-        listaDobleCircular.add(2,5);
-        listaDobleCircular.printList();
-        listaDobleCircular.clear();
-        listaDobleCircular.printList();
-        System.out.println(listaDobleCircular.size());
+//        ListImplDobleCircular listaDobleCircular = new ListImplDobleCircular();
+//        listaDobleCircular.add(6);
+//        listaDobleCircular.add(8);
+//        listaDobleCircular.add(2,5);
+//        listaDobleCircular.printList();
+//        listaDobleCircular.clear();
+//        listaDobleCircular.printList();
+//        System.out.println(listaDobleCircular.size());
     }
 
     public static double getMemory() {

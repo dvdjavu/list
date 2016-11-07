@@ -24,6 +24,12 @@ public class NodoDoble{
         this.next = next;
     }
 
+    public NodoDoble(int dato, NodoDoble next, NodoDoble before) {
+        this.dato = dato;
+        this.next = next;
+        this.before = before;
+    }
+
     public int getDato() {
         return dato;
     }

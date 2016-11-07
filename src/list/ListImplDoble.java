@@ -33,12 +33,11 @@ public class ListImplDoble implements List {
         } else {
             NodoDoble aux = first;
             while (aux.getNext() != null) {
-                aux = aux.getNext(); 
+                aux = aux.getNext();
             }
-            aux.setNext(new NodoDoble(dato));
-            NodoDoble next = aux.getNext();
-            aux.setNext(next);
-            next.setBefore(aux);
+            NodoDoble nuevo = new NodoDoble(dato);
+            aux.setNext(nuevo);
+            nuevo.setBefore(aux);
             flag = true;
         }
         size++;
@@ -57,11 +56,10 @@ public class ListImplDoble implements List {
             System.out.println(e);
             return false;
         }
-        NodoDoble nuevo = new NodoDoble(dato);
         if (index == 0) {
             NodoDoble tmp = first;
+            NodoDoble nuevo = new NodoDoble(dato, tmp);
             first = nuevo;
-            first.setNext(tmp);
             tmp.setBefore(nuevo);
             ++size;
             return true;
@@ -71,9 +69,9 @@ public class ListImplDoble implements List {
             aux = aux.getNext();
             posicion++;
         }
-        NodoDoble tmp = aux.getNext();
+        NodoDoble nuevo = new NodoDoble(dato, aux.getNext());
         aux.setNext(nuevo);
-        nuevo.setNext(tmp);
+        nuevo.setBefore(aux);
         ++size;
         return true;
     }
@@ -90,6 +88,7 @@ public class ListImplDoble implements List {
 
     void clearRecurse(NodoDoble borrar) {
         if (borrar.getNext() == null) {
+            borrar = null;
             System.gc();
         } else {
             clearRecurse(borrar.getNext());
@@ -304,5 +303,5 @@ public class ListImplDoble implements List {
         }
         return arreglo;
     }
-    
+
 }

@@ -51,6 +51,7 @@ public class ListImpl implements List {
     @Override
     public boolean add(int index, int dato) throws NullPointerException {
         int posicion = 0;
+        
         try {
             if (index < 0 || index > size()) {
                 throw new NullPointerException();
@@ -67,12 +68,11 @@ public class ListImpl implements List {
             return true;
         }
         Nodo aux = first;
-        while (aux.getNext() != null && posicion != index - 1) {
+        while (aux.getNext() != null && posicion != index-1) {
             aux = aux.getNext();
             posicion++;
         }
-        Nodo tmp = aux.getNext();
-        Nodo nuevo = new Nodo(dato, tmp);
+        Nodo nuevo = new Nodo(dato, aux.getNext());
         aux.setNext(nuevo);
         ++size;
         return true;
@@ -90,6 +90,7 @@ public class ListImpl implements List {
 
     void clearRecurse(Nodo borrar) {
         if (borrar.getNext() == null) {
+            borrar = null;
         } else {
             clearRecurse(borrar.getNext());
             borrar.setNext(null);

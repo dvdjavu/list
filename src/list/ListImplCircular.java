@@ -93,9 +93,6 @@ public class ListImplCircular implements List {
             System.out.println("La lista se encuentra vacía");
         } else {
             clearRecurse(first.getNext());
-            first.setNext(null);
-            first = null;
-            size--;
             System.out.println("La lista fue vaciada por completo");
         }
     }
