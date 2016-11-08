@@ -29,7 +29,6 @@ public class Prueba {
 //        System.out.println("El número que buscaste se encuentra en la posición: " + lista.indexOf(1));
 //        System.out.println("¿La lista esta vacia? " + lista.isEmpty());
 //        lista.remove(2);
-//        
 //        lista.printList();
 //        lista.add(2);
 //        lista.add(2);
@@ -51,39 +50,74 @@ public class Prueba {
         Listas circulares
         
          */
-        ListImplCircular listaCircular = new ListImplCircular();
-        listaCircular.add(6);
-        listaCircular.add(8);
-        listaCircular.add(0,5);
-        listaCircular.add(2,5);
-        listaCircular.printList();
-        listaCircular.contains(5);
-        listaCircular.printList();
-        System.out.println(listaCircular.size());
-        listaCircular.get(5);
-        listaCircular.printList();
-        listaCircular.remove(5);
-        listaCircular.printList();
-        listaCircular.removeIndex(0);
-        listaCircular.printList();
-        listaCircular.set(0, 4);
-        listaCircular.printList();
-        listaCircular.clear();
-        listaCircular.printList();
-        System.out.println(Arrays.toString(listaCircular.toArray()));
+//        ListImplCircular listaCircular = new ListImplCircular();
+//
+//        listaCircular.add(6);
+//        listaCircular.add(8);
+//        listaCircular.add(0,5);
+//        listaCircular.add(2,5);
+//        listaCircular.printList();
+//        listaCircular.contains(5);
+//        listaCircular.printList();
+//        System.out.println(listaCircular.size());
+//        listaCircular.get(5);
+//        listaCircular.printList();
+//        listaCircular.remove(5);
+//        listaCircular.printList();
+//        System.out.println(listaCircular.indexOf(8));
+//        listaCircular.removeIndex(0);
+//        listaCircular.set(0, 4);
+//        listaCircular.printList();
+//        System.out.println(Arrays.toString(listaCircular.toArray()));
+//        listaCircular.clear();
+//        listaCircular.printList();
+//        System.out.println(Arrays.toString(listaCircular.toArray()));
         /*
         
-        Listas circulares
+        Listas dobles
         
          */
-//        ListImplDobleCircular listaDobleCircular = new ListImplDobleCircular();
-//        listaDobleCircular.add(6);
-//        listaDobleCircular.add(8);
-//        listaDobleCircular.add(2,5);
-//        listaDobleCircular.printList();
-//        listaDobleCircular.clear();
-//        listaDobleCircular.printList();
-//        System.out.println(listaDobleCircular.size());
+//        ListImplDoble listaDoble = new ListImplDoble();
+//        
+//        listaDoble.add(4);
+//        listaDoble.add(54);
+//        listaDoble.add(54);
+//        listaDoble.add(0, 0);
+//        listaDoble.add(0, 0);
+//        listaDoble.add(54);
+//        listaDoble.printList();
+//        listaDoble.clear();
+//        listaDoble.printList();
+//        listaDoble.contains(0);
+//        listaDoble.contains(3);
+//        listaDoble.get(0);
+//        listaDoble.add(0, 2);
+//        listaDoble.add(0, 3);
+//        listaDoble.add(0, 4);
+//        System.out.println(listaDoble.indexOf(2));
+//        listaDoble.remove(0);
+//        listaDoble.printList();
+//        listaDoble.removeIndex(0);
+//        listaDoble.printList();
+//        listaDoble.set(1, 0);
+//        listaDoble.printList();
+//        System.out.println(Arrays.toString(listaDoble.toArray()));
+        /*
+        
+        Listas dobles circulares
+        
+         */
+        ListImplDobleCircular listaDobleCircular = new ListImplDobleCircular();
+
+        listaDobleCircular.add(6);
+        listaDobleCircular.add(8);
+        listaDobleCircular.add(0,5);
+        listaDobleCircular.printList();
+        listaDobleCircular.clear();
+        listaDobleCircular.printList();
+        listaDobleCircular.contains(5);
+        System.out.println(listaDobleCircular.get(0));
+        listaDobleCircular.remove(0);
     }
 
     public static double getMemory() {

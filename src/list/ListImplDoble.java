@@ -88,6 +88,7 @@ public class ListImplDoble implements List {
 
     void clearRecurse(NodoDoble borrar) {
         if (borrar.getNext() == null) {
+            borrar.setBefore(null);
             borrar = null;
             System.gc();
         } else {
@@ -95,7 +96,7 @@ public class ListImplDoble implements List {
             borrar.setNext(null);
             borrar.setBefore(null);
             borrar = null;
-            size--;
+            --size;
         }
 
     }

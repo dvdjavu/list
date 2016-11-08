@@ -315,7 +315,6 @@ public class ListImplCircular implements List {
     @Override
     public int[] toArray() {
         int[] arreglo = new int[size()];
-        arreglo[0] = first.getDato();
         Nodo aux = first;
         for (int i = 0; i < arreglo.length; i++) {
             arreglo[i] = aux.getDato();

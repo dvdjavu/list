@@ -57,12 +57,11 @@ public class ListImplDobleCircular implements List {
             System.out.println(e);
             return false;
         }
-        NodoDoble nuevo = new NodoDoble(dato);
         if (index == 0) {
             NodoDoble tmp = first;
-            first = nuevo;
-            first.setNext(tmp);
+            NodoDoble nuevo = new NodoDoble(dato, tmp);
             tmp.setBefore(nuevo);
+            first = nuevo;
             ++size;
             return true;
         }
@@ -72,8 +71,13 @@ public class ListImplDobleCircular implements List {
             posicion++;
         }
         NodoDoble tmp = aux.getNext();
+        NodoDoble nuevo = new NodoDoble(dato, tmp);
         aux.setNext(nuevo);
-        nuevo.setNext(tmp);
+        nuevo.setBefore(aux);
+        while(aux.getNext() != null){
+            aux = aux.getNext();
+        }
+        aux.setNext(first);
         ++size;
         return true;
     }
@@ -88,15 +92,17 @@ public class ListImplDobleCircular implements List {
         }
     }
 
-    void clearRecurse(NodoDoble borrar) {
+    private void clearRecurse(NodoDoble borrar) {
         if (borrar.getNext() == null) {
+            borrar.setBefore(null);
+            borrar = null;
             System.gc();
         } else {
             clearRecurse(borrar.getNext());
             borrar.setNext(null);
             borrar.setBefore(null);
             borrar = null;
-            size--;
+            --size;
         }
 
     }
@@ -204,7 +210,7 @@ public class ListImplDobleCircular implements List {
             return true;
         }
         NodoDoble aux = first;
-        while (aux.getNext().getNext() != null) {
+        while (aux.getNext() != first) {
             if (aux.getDato() == d) {
                 flag = true;
                 break;

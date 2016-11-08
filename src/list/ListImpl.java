@@ -88,7 +88,7 @@ public class ListImpl implements List {
         }
     }
 
-    void clearRecurse(Nodo borrar) {
+    private void clearRecurse(Nodo borrar) {
         if (borrar.getNext() == null) {
             borrar = null;
         } else {
