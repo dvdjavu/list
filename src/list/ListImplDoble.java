@@ -65,7 +65,7 @@ public class ListImplDoble implements List {
             return true;
         }
         NodoDoble aux = first;
-        while (aux.getNext() != null && posicion != index - 1) {
+        while (aux.getNext() != first && posicion != index - 1) {
             aux = aux.getNext();
             posicion++;
         }

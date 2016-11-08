@@ -107,17 +107,18 @@ public class Prueba {
         Listas dobles circulares
         
          */
-        ListImplDobleCircular listaDobleCircular = new ListImplDobleCircular();
-
-        listaDobleCircular.add(6);
-        listaDobleCircular.add(8);
-        listaDobleCircular.add(0,5);
-        listaDobleCircular.printList();
-        listaDobleCircular.clear();
-        listaDobleCircular.printList();
-        listaDobleCircular.contains(5);
-        System.out.println(listaDobleCircular.get(0));
-        listaDobleCircular.remove(0);
+//        ListImplDobleCircular listaDobleCircular = new ListImplDobleCircular();
+//
+//        listaDobleCircular.add(6);
+//        listaDobleCircular.add(8);
+//        listaDobleCircular.add(0,5);
+//        listaDobleCircular.printList();
+//        listaDobleCircular.clear();
+//        System.out.println(listaDobleCircular.size());
+//        listaDobleCircular.printList();
+//        listaDobleCircular.contains(5);
+//        System.out.println(listaDobleCircular.get(0));
+//        listaDobleCircular.remove(0);
     }
 
     public static double getMemory() {

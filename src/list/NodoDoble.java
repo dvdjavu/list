@@ -23,8 +23,13 @@ public class NodoDoble{
         this.dato = dato;
         this.next = next;
     }
+    
+    public NodoDoble(NodoDoble before, int dato) {
+        this.dato = dato;
+        this.before = before;
+    }
 
-    public NodoDoble(int dato, NodoDoble next, NodoDoble before) {
+    public NodoDoble(NodoDoble before, int dato, NodoDoble next) {
         this.dato = dato;
         this.next = next;
         this.before = before;
