@@ -43,8 +43,7 @@ public class ListImplCircular implements List {
             while (aux.getNext() != first) {
                 aux = aux.getNext();
             }
-            aux.setNext(new Nodo(dato));
-            aux.getNext().setNext(first);
+            aux.setNext(new Nodo(dato, first));
             flag = true;
         }
         size++;
@@ -76,7 +75,7 @@ public class ListImplCircular implements List {
             return true;
         }
         Nodo aux = first;
-        while (aux.getNext() != first && posicion != index - 1) {
+        while (posicion != index - 1) {
             aux = aux.getNext();
             posicion++;
         }
@@ -169,7 +168,7 @@ public class ListImplCircular implements List {
             if (index == 0) {
                 valor = first.getDato();
             } else {
-                while (aux.getNext() != null || posicion != index) {
+                while (posicion != index) {
                     aux = aux.getNext();
                     posicion++;
                 }
@@ -190,7 +189,7 @@ public class ListImplCircular implements List {
             if (d == first.getDato()) {
                 return posicion;
             }
-            while (aux.getNext() != null) {
+            while (aux.getNext() != first) {
                 if (aux.getDato() == d) {
                     return posicion;
                 } else {

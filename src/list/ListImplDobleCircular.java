@@ -32,11 +32,11 @@ public class ListImplDobleCircular implements List {
             first = new NodoDoble(first, dato, first);
             first.setBefore(first);
             first.setNext(first);
-            
+
         } else {
             NodoDoble aux = first;
             while (aux.getNext() != first) {
-                aux = aux.getNext(); 
+                aux = aux.getNext();
             }
             NodoDoble next = new NodoDoble(dato, first);
             aux.setNext(next);
@@ -60,27 +60,27 @@ public class ListImplDobleCircular implements List {
             System.out.println(e);
             return false;
         }
+        if (isEmpty()) {
+            add(dato);
+            return true;
+        }
         if (index == 0) {
-            NodoDoble tmp = first;
-            NodoDoble nuevo = new NodoDoble(dato, tmp);
-            tmp.setBefore(nuevo);
-            while(tmp.getNext() != first){
-                tmp = tmp.getNext();
-            }
-            tmp.setNext(nuevo);
+            NodoDoble nuevo = new NodoDoble(first.getBefore(), dato, first);
+            first.getBefore().setNext(nuevo);
+            first.setBefore(nuevo);
             first = nuevo;
             ++size;
             return true;
         }
         NodoDoble aux = first;
-        while (aux.getNext() != first && posicion != index-1) {
+        while (aux.getNext() != first && posicion != index - 1) {
             aux = aux.getNext();
             posicion++;
         }
         NodoDoble nuevo = new NodoDoble(dato, aux.getNext());
         aux.setNext(nuevo);
         nuevo.setBefore(aux);
-        while(aux.getNext() != first){
+        while (aux.getNext() != first) {
             aux = aux.getNext();
         }
         aux.setNext(first);
@@ -95,6 +95,8 @@ public class ListImplDobleCircular implements List {
             System.out.println("La lista se encuentra vacía");
         } else {
             clearRecurse(first);
+            first = null;
+            size--;
             System.out.println("La lista fue vaciada por completo");
         }
     }
@@ -102,9 +104,11 @@ public class ListImplDobleCircular implements List {
     private void clearRecurse(NodoDoble borrar) {
         if (borrar.getNext() == first) {
             borrar = null;
+            size--;
         } else {
             clearRecurse(borrar.getNext());
             borrar.setNext(null);
+            borrar.setBefore(null);
             borrar = null;
             System.gc();
             --size;
@@ -136,7 +140,7 @@ public class ListImplDobleCircular implements List {
             if (first.getDato() == d) {
                 ++contiene;
             }
-            while (aux.getNext() != null) {
+            while (aux.getNext() != first) {
                 aux = aux.getNext();
                 if (aux.getDato() == d) {
                     ++contiene;
@@ -210,7 +214,10 @@ public class ListImplDobleCircular implements List {
         if (first.getDato() == d) {
             NodoDoble aux = first;
             first = aux.getNext();
+            first.setBefore(aux.getBefore());
+            aux.getBefore().setNext(first);
             aux.setNext(null);
+            aux.setBefore(null);
             aux = null;
             return true;
         }
@@ -223,14 +230,22 @@ public class ListImplDobleCircular implements List {
             aux = aux.getNext();
         }
         if (flag) {
-            NodoDoble tmp = aux.getNext();
-            aux.setNext(tmp.getNext());
-            tmp.setNext(null);
-            tmp = null;
+            aux.getBefore().setNext(aux.getNext());
+            aux.getNext().setBefore(aux.getBefore());
+            if (aux == first) {
+                first = aux.getNext();
+            }
+            aux.setNext(null);
+            aux.setBefore(null);
+            aux = null;
             size--;
             return flag;
         } else if (aux.getNext().getDato() == d) {
+            first.setBefore(aux.getBefore());
+            aux.getBefore().setNext(first);
             aux.setNext(null);
+            aux.setBefore(null);
+            aux = null;
             size--;
             return flag;
         }
@@ -252,26 +267,35 @@ public class ListImplDobleCircular implements List {
         if (index == 0) {
             NodoDoble tmp = first;
             first = tmp.getNext();
+            first.setBefore(tmp.getBefore());
+            tmp.getBefore().setNext(first);
             tmp.setNext(null);
+            tmp.setBefore(null);
             tmp = null;
             --size;
             return true;
         }
         NodoDoble aux = first;
-        while (posicion != index - 1) {
-            aux = aux.getNext();
-            posicion++;
-        }
-        NodoDoble tmp = aux;
-        if (tmp.getNext() == null) {
-            aux.setNext(tmp.getNext());
-            tmp.setNext(null);
-            tmp = null;
+        if (index > (size / 2)) {
+            posicion = size;
+            while (posicion != index - 1) {
+                aux = aux.getNext();
+                posicion--;
+            }
         } else {
-            aux.setNext(tmp.getNext().getNext());
-            tmp.setNext(null);
-            tmp = null;
+            while (posicion != index - 1) {
+                aux = aux.getNext();
+                posicion++;
+            }
         }
+        aux.getBefore().setNext(aux.getNext());
+        aux.getNext().setBefore(aux.getBefore());
+        if (aux == first) {
+            first = aux.getNext();
+        }
+        aux.setNext(null);
+        aux.setBefore(null);
+        aux = null;
         --size;
         return true;
     }
@@ -315,5 +339,5 @@ public class ListImplDobleCircular implements List {
         }
         return arreglo;
     }
-    
+
 }

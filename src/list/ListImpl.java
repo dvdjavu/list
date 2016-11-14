@@ -51,7 +51,7 @@ public class ListImpl implements List {
     @Override
     public boolean add(int index, int dato) throws NullPointerException {
         int posicion = 0;
-        
+
         try {
             if (index < 0 || index > size()) {
                 throw new NullPointerException();
@@ -68,7 +68,7 @@ public class ListImpl implements List {
             return true;
         }
         Nodo aux = first;
-        while (aux.getNext() != null && posicion != index-1) {
+        while (aux.getNext() != null && posicion != index - 1) {
             aux = aux.getNext();
             posicion++;
         }
@@ -130,11 +130,8 @@ public class ListImpl implements List {
                     ++contiene;
                 }
             }
-            if (contiene > 0) {
-                System.out.println((contiene == 1) ? "La lista contiene " + contiene + " vez el número " + d : "La lista contiene " + contiene + " veces el número " + d);
-            } else {
-                System.out.println("La lista no contiene el número " + d);
-            }
+            String singilarPlural = "La lista contiene " + ((contiene == 1) ? "una vez el número" + d : contiene + " veces el número " + d);
+            System.out.println((contiene > 0)? singilarPlural : "La lista no contiene el número " + d);
         }
         return contiene > 0;
     }

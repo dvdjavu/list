@@ -27,17 +27,17 @@ public class ListImplDoble implements List {
 
     @Override
     public boolean add(int dato) {
-        boolean flag = false;
+        boolean flag;
         if (isEmpty()) {
             first = new NodoDoble(dato);
+            flag = true;
         } else {
             NodoDoble aux = first;
             while (aux.getNext() != null) {
                 aux = aux.getNext();
             }
-            NodoDoble nuevo = new NodoDoble(dato);
+            NodoDoble nuevo = new NodoDoble(aux, dato);
             aux.setNext(nuevo);
-            nuevo.setBefore(aux);
             flag = true;
         }
         size++;
@@ -56,22 +56,26 @@ public class ListImplDoble implements List {
             System.out.println(e);
             return false;
         }
+        if (isEmpty()) {
+            add(dato);
+            return true;
+        }
         if (index == 0) {
             NodoDoble tmp = first;
-            NodoDoble nuevo = new NodoDoble(dato, tmp);
+            NodoDoble nuevo = new NodoDoble(first.getBefore(), dato, first);
             first = nuevo;
             tmp.setBefore(nuevo);
             ++size;
             return true;
         }
         NodoDoble aux = first;
-        while (aux.getNext() != first && posicion != index - 1) {
+        while (posicion != index - 1) {
             aux = aux.getNext();
             posicion++;
         }
-        NodoDoble nuevo = new NodoDoble(dato, aux.getNext());
+        NodoDoble nuevo = new NodoDoble(aux, dato, aux.getNext());
         aux.setNext(nuevo);
-        nuevo.setBefore(aux);
+        aux.getNext().setBefore(nuevo);
         ++size;
         return true;
     }
@@ -82,6 +86,8 @@ public class ListImplDoble implements List {
             System.out.println("La lista se encuentra vacía");
         } else {
             clearRecurse(first);
+            first = null;
+            size--;
             System.out.println("La lista fue vaciada por completo");
         }
     }
@@ -90,20 +96,20 @@ public class ListImplDoble implements List {
         if (borrar.getNext() == null) {
             borrar.setBefore(null);
             borrar = null;
-            System.gc();
+            size--;
         } else {
             clearRecurse(borrar.getNext());
             borrar.setNext(null);
             borrar.setBefore(null);
             borrar = null;
             --size;
+            System.gc();
         }
-
     }
 
     public void printList() {
         if (isEmpty()) {
-            System.out.println("La lista esta vacia");
+            System.out.println("La lista esta vacía");
         } else {
             NodoDoble aux = first;
             while (aux.getNext() != null) {
@@ -122,14 +128,11 @@ public class ListImplDoble implements List {
             return false;
         } else {
             NodoDoble aux = first;
-            if (first.getDato() == d) {
-                ++contiene;
-            }
             while (aux.getNext() != null) {
-                aux = aux.getNext();
                 if (aux.getDato() == d) {
                     ++contiene;
                 }
+                aux = aux.getNext();
             }
             if (contiene > 0) {
                 System.out.println((contiene == 1) ? "La lista contiene " + contiene + " vez el número " + d : "La lista contiene " + contiene + " veces el número " + d);
@@ -204,24 +207,29 @@ public class ListImplDoble implements List {
             return true;
         }
         NodoDoble aux = first;
-        while (aux.getNext().getNext() != null) {
+        while (aux.getNext() != null) {
             if (aux.getDato() == d) {
                 flag = true;
                 break;
             }
             aux = aux.getNext();
         }
+        if (!flag) {
+            if(aux.getDato() == d){
+                aux.getBefore().setNext(null);
+                aux = null;
+                size--;
+                return true;
+            }
+        }
         if (flag) {
-            NodoDoble tmp = aux.getNext();
-            aux.setNext(tmp.getNext());
-            tmp.setNext(null);
-            tmp = null;
-            size--;
-            return flag;
-        } else if (aux.getNext().getDato() == d) {
+            aux.getBefore().setNext(aux.getNext());
+            aux.getNext().setBefore(aux.getBefore());
+            aux.setBefore(null);
             aux.setNext(null);
+            aux = null;
             size--;
-            return flag;
+            return true;
         }
         return false;
     }
